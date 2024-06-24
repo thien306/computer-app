@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>UPDATE TYPE COMPUTER</title>
+</head>
+<body>
+<h3>UPDATE TYPE COMPUTER</h3>
+<p>
+    <a class="no-underline" th:href="@{/types}">
+        Back to province list
+    </a>
+</p>
+<div id="container">
+    <form id="form" th:action="@{/types/update}" th:object="${type}"
+          method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <input type="hidden" id="id" name="id" th:field="*{id}"/>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" th:field="*{name}"/>
+            <span style="color: red" id="name_error"></span>
+        </div>
+
+        <div>
+            <label for="image">IMAGE</label>
+            <input type="file" id="image" name="image" th:field="*{image}"/>
+            <span style="color: red" id="image_error"></span>
+
+        </div>
+        <input type="submit" value="UPDATE">
+    </form>
+</div>
+
+<script>
+    const name = document.getElementById('name');
+    const image = document.getElementById('image');
+    const form = document.getElementById('form');
+
+    const name_error = document.getElementById("name_error")
+    const image_error = document.getElementById("image_error")
+
+    form.addEventListener('submit', (e)=> {
+
+        if (name.value === '') {
+            e.preventDefault();
+            name_error.innerHTML = 'name cannot be blank'
+        } else {
+            name_error.innerHTML = '';
+        }
+
+        if (image.value === '') {
+            e.preventDefault();
+            image_error.innerHTML = 'Photos cannot be blank'
+        } else {
+            image.innerHTML = '';
+        }
+
+    })
+
+</script>
+</body>
+</html>
